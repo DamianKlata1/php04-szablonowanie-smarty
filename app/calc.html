@@ -1,0 +1,82 @@
+{extends file="../templates/main.html"}
+
+{block name=content}
+
+<section id="footer">
+    <div class="inner">
+        <a id="form"><h2 class="major">Kalkulator kredytowy</h2></a>
+        <form method="post" action="{$app_url}/app/calc.php">
+            <div class="fields">
+                <div class="field">
+                    <label for="amount">Kwota</label>
+                    <input type="text" name="amount" id="amount" value="{$form['amount']}"/>
+                </div>
+                <div class="field">
+                    <label for="years">Ile lat ?</label>
+                    <input type="text" name="years" id="years" value="{$form['years']}" />
+                </div>
+                <div class="field">
+                    <label for="interest">Oprocentowanie</label>
+                    <input type="text" name="interest" id="interest" value="{$form['interest']}"/>
+                </div>
+            </div>
+            <ul class="actions">
+                <a href="#submit"><li><input type="submit" value="Oblicz"  /></li></a>
+            </ul>
+        </form>
+        <ul class ="contact">
+        {* wyświeltenie listy błędów, jeśli istnieją *}
+        {if isset($messages)}
+        {if count($messages) > 0}
+        <h3>Wystąpiły błędy: </h3>
+        <ol class="err">
+            {foreach  $messages as $msg}
+            {strip}
+            <li>{$msg}</li>
+            {/strip}
+            {/foreach}
+        </ol>
+        {/if}
+        {/if}
+
+        {* wyświeltenie listy informacji, jeśli istnieją *}
+        {if isset($infos)}
+        {if count($infos) > 0}
+        <h3>Informacje: </h3>
+        <ol class="inf">
+            {foreach  $infos as $msg}
+            {strip}
+            <li>{$msg}</li>
+            {/strip}
+            {/foreach}
+        </ol>
+        {/if}
+        {/if}
+
+        {if isset($result)}
+            <h3>Miesięczna rata:</h3>
+        <p class="res">
+            {$result}zł
+        </p>
+
+        {/if}
+
+        </ul>
+    </div>
+
+</section>
+
+{/block}
+
+{block name=footer}
+
+<section id="footer">
+    <div class="inner">
+        <ul class="copyright">
+            <li>Stopka kalkulatora kredytowego</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</section>
+
+{/block}
